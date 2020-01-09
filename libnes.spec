@@ -1,6 +1,6 @@
 Name: libnes
 Version: 1.1.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: NetEffect RNIC Userspace Driver
 Group: System Environment/Libraries
 License: GPLv2 or BSD
@@ -57,6 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Wed Mar 11 2015 Doug Ledford <dledford@redhat.com> - 1.1.4-2
+- Bump and rebuild against updated valgrind-devel
+- Resolves: bz1142165
+
 * Wed Jun 18 2014 Doug Ledford <dledford@redhat.com> - 1.1.4-1
 - Update to latest upstream and build against new libibverbs
 - Related: bz854655
