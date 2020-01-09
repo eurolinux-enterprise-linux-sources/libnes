@@ -1,6 +1,6 @@
 Name: libnes
 Version: 1.1.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: NetEffect RNIC Userspace Driver
 Group: System Environment/Libraries
 License: GPLv2 or BSD
@@ -8,8 +8,9 @@ Url: http://www.openfabrics.org/
 Source: http://www.openfabrics.org/downloads/nes/%{name}-%{version}.tar.gz
 Patch0: libnes-1.1.1-remove-RAW_ETH.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires: libibverbs-devel >= 1.1.3
-ExclusiveArch: i386 x86_64 ia64 ppc ppc64
+BuildRequires: libibverbs-devel > 1.1.4
+ExclusiveArch: %{ix86} x86_64 ia64 ppc ppc64
+Provides: libibverbs-driver.%{_arch}
 Obsoletes: %{name}-devel
 %description
 Userspace hardware driver for use with the libibverbs InfiniBand/iWARP verbs
@@ -51,6 +52,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Mon Jul 25 2011 Doug Ledford <dledford@redhat.com> - 1.1.1-2
+- Rebuild against latest libibverbs
+- Add psuedo provide of libibverbs-driver.%%{_arch}
+- Fix exclusivearch to work on i686
+- Related: bz725016, bz724900
+
 * Mon Jan 17 2011 Doug Ledford <dledford@redhat.com> - 1.1.1-1.el6
 - Update to latest upstream release
 - Related: bz664801
