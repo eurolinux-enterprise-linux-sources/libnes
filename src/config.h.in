@@ -1,5 +1,9 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
 
+/* Define to 1 if you have the declaration of `IBV_QPT_RAW_ETH', and to 0 if
+   you don't. */
+#undef HAVE_DECL_IBV_QPT_RAW_ETH
+
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 

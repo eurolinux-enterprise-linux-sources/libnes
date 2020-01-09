@@ -1,14 +1,16 @@
 Name: libnes
-Version: 1.1.1
-Release: 2%{?dist}
+Version: 1.1.3
+Release: 1%{?dist}
 Summary: NetEffect RNIC Userspace Driver
 Group: System Environment/Libraries
 License: GPLv2 or BSD
 Url: http://www.openfabrics.org/
 Source: http://www.openfabrics.org/downloads/nes/%{name}-%{version}.tar.gz
-Patch0: libnes-1.1.1-remove-RAW_ETH.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libibverbs-devel > 1.1.4
+%ifnarch ia64
+BuildRequires: valgrind-devel
+%endif
 ExclusiveArch: %{ix86} x86_64 ia64 ppc ppc64
 Provides: libibverbs-driver.%{_arch}
 Obsoletes: %{name}-devel
@@ -25,11 +27,14 @@ Static version of libnes that may be linked directly to an application.
 
 %prep
 %setup -q
-%patch0 -p1 -b .raw_eth
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing"
+%ifnarch ia64
+%configure --with-valgrind
+%else
 %configure
+%endif
 make %{?_smp_mflags}
 
 %install
@@ -52,6 +57,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Mon Jan 23 2012 Doug Ledford <dledford@redhat.com> - 1.1.3-1
+- Update to latest upstream release
+- Rebuild against latest libibverbs (native FDR/IBoE enabled)
+- Related: bz750609
+
 * Mon Jul 25 2011 Doug Ledford <dledford@redhat.com> - 1.1.1-2
 - Rebuild against latest libibverbs
 - Add psuedo provide of libibverbs-driver.%%{_arch}

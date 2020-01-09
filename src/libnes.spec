@@ -1,12 +1,12 @@
 Name: libnes
-Version: 1.1.1
+Version: 1.1.3
 Release: 1
 Summary: NetEffect Ethernet Server Cluster Adapter Userspace Library
 
 Group: System Environment/Libraries
 License: GPL/BSD
 Url: http://www.openfabrics.org/
-Source: http://www.openfabrics.org/downloads/libnes-1.1.1.tar.gz
+Source: http://www.openfabrics.org/downloads/libnes-1.1.3.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: libibverbs-devel
@@ -25,7 +25,7 @@ Static version of libnes that may be linked directly to an
 application, which may be useful for debugging.
 
 %prep
-%setup -q -n %{name}-1.1.1
+%setup -q -n %{name}-1.1.3
 
 %build
 %configure
@@ -51,6 +51,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libnes*.a
 
 %changelog
+*Fri Nov 21 2011 Faisal Latif <faisal.latif@intel.com> - 1.1.3
+- Update for OFED 1.5.4
+- Declaration of IBV_QPT_RAW_ETH
+
+*Fri Nov 04 2011 Faisal Latif <faisal.latif@intel.com> - 1.1.2
+- Update for OFED 1.5.4
+- Fix build against upstream libibverbs
+
 *Wed Dec 15 2010 Faisal Latif <faisal.latif@intel.com> - 1.1.1
 - Update for OFED 1.5.3
 - Error check when sge > 4 for posting recv buffers
