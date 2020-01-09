@@ -1,5 +1,5 @@
 Name: libnes
-Version: 1.1.3
+Version: 1.1.4
 Release: 1%{?dist}
 Summary: NetEffect RNIC Userspace Driver
 Group: System Environment/Libraries
@@ -57,6 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Wed Jun 18 2014 Doug Ledford <dledford@redhat.com> - 1.1.4-1
+- Update to latest upstream and build against new libibverbs
+- Related: bz854655
+
 * Mon Jan 23 2012 Doug Ledford <dledford@redhat.com> - 1.1.3-1
 - Update to latest upstream release
 - Rebuild against latest libibverbs (native FDR/IBoE enabled)
