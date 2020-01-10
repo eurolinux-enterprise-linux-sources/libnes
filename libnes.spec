@@ -1,6 +1,6 @@
 Name: libnes
-Version: 1.1.3
-Release: 5%{?dist}
+Version: 1.1.4
+Release: 2%{?dist}
 Summary: NetEffect RNIC Userspace Driver
 Group: System Environment/Libraries
 License: GPLv2 or BSD
@@ -8,10 +8,11 @@ Url: http://www.openfabrics.org/
 Source: http://www.openfabrics.org/downloads/nes/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: libibverbs-devel > 1.1.4
-%ifnarch ia64 %{sparc} %{arm}
+%ifnarch ia64 %{sparc}
 BuildRequires: valgrind-devel
 %endif
 Provides: libibverbs-driver.%{_arch}
+Requires: rdma
 ExcludeArch: s390 s390x
 Obsoletes: %{name}-devel
 %description
@@ -30,7 +31,7 @@ Static version of libnes that may be linked directly to an application.
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing"
-%ifnarch ia64 %{sparc} %{arm}
+%ifnarch ia64 %{sparc}
 %configure --with-valgrind
 %else
 %configure
@@ -57,6 +58,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Tue Dec 23 2014 Doug Ledford <dledford@redhat.com> - 1.1.4-2
+- Require the rdma package
+- Related: bz1164618
+
+* Fri Oct 17 2014 Doug Ledford <dledford@redhat.com> - 1.1.4-1
+- Update to latest and rebuild against latest libibverbs and
+  valgrind (1142116)
+- Related: bz1137044
+
 * Mon Mar 03 2014 Doug Ledford <dledford@redhat.com> - 1.1.3-5
 - Bump and rebuild against latest libibverbs
 - Related: bz1062281
