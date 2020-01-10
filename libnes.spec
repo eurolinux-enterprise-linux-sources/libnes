@@ -1,6 +1,6 @@
 Name: libnes
 Version: 1.1.3
-Release: 3%{?dist}
+Release: 5%{?dist}
 Summary: NetEffect RNIC Userspace Driver
 Group: System Environment/Libraries
 License: GPLv2 or BSD
@@ -57,6 +57,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.a
 
 %changelog
+* Mon Mar 03 2014 Doug Ledford <dledford@redhat.com> - 1.1.3-5
+- Bump and rebuild against latest libibverbs
+- Related: bz1062281
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.1.3-4
+- Mass rebuild 2013-12-27
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
